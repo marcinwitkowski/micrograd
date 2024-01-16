@@ -87,6 +87,15 @@ class Value:
 
         return out
 
+    def mse(self, true_val):
+        out = Value((true_val.data - self.data)**2, (self,), 'BCE')
+
+        def _backward():
+            self.grad += (self.data - true_val.data)
+        out._backward = _backward
+
+        return out
+
     def backward(self):
 
         # topological order all of the children in the graph
