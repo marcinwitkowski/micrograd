@@ -88,7 +88,7 @@ class Value:
         return out
 
     def mse(self, true_val):
-        out = Value((true_val.data - self.data)**2, (self,), 'BCE')
+        out = Value((true_val.data - self.data)**2, (self,), 'MSE')
 
         def _backward():
             self.grad += (self.data - true_val.data)
